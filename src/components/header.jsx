@@ -9,7 +9,7 @@ export default class Header extends Component {
     }
 
     handleChange = (e) => {
-
+        this.setState({searchTerm: e.target.value})
     }
 
     handleKeyPress = (e) => {
