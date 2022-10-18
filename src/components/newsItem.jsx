@@ -1,6 +1,6 @@
 import React from 'react'
 
-const getDateString = ({date}) => {
+const getDateString = (date) => {
     return new Date(date).toDateString()
 }
 
@@ -35,7 +35,7 @@ const NewsItem = ({item}) => {
             <div className='mt-2 d-flex align-items-center'>
                 <small>
                     <strong>
-                        Published at {getDateString(item.publishAt)}
+                        Published at {getDateString(item.publishedAt)}
                     </strong>
                 </small>
                 <div 

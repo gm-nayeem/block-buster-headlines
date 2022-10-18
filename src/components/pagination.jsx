@@ -6,12 +6,41 @@ export default class Pagination extends Component {
     }
 
     render() {
+        const {
+            prev,
+            next,
+            isPrev,
+            isNext,
+            currentPage,
+            totalPage,
+            handlePageChange,
+            goToPage,
+        } = this.props
+
         return (
             <div className='d-flex my-5 align-items-center'>
-                <button className='btn btn-warning'>Previous</button>
+                <button 
+                    className='btn btn-warning'
+                    disabled={!isPrev}
+                    onClick={() => {
+                        prev()
+                    }}
+                >
+                    Previous
+                </button>
                 <div className='flex-grow-1 text-center'>
                     {this.state.isEditable ? (
-                        <input type='number' value='1' />
+                        <input 
+                            type='number' 
+                            value={currentPage}
+                            onChange={(e) => handlePageChange(e.target.value)}
+                            onKeyPress={(e) => {
+                                if(e.key === 'Enter') {
+                                    goToPage()
+                                    this.setState({isEditable: false})
+                                }
+                            }}
+                        />
                     ) : (
                         <p
                             style={{ userSelect: 'none', lineHeight: '1.1' }}
@@ -20,13 +49,22 @@ export default class Pagination extends Component {
                                 this.setState({ isEditable: !this.state.isEditable })
                             }}
                         >
-                            {1} of {100}
+                            {currentPage} of {totalPage}
                             <br />
                             <small>Double Tap To Edit</small>
                         </p>
                     )}
                 </div>
-                <button className='btn btn-warning' style={{ marginLeft: 'auto' }}>Next</button>
+                <button 
+                    className='btn btn-warning' 
+                    style={{ marginLeft: 'auto' }}
+                    disabled={!isNext}
+                    onClick={() => {
+                        next()
+                    }}
+                >
+                    Next
+                </button>
             </div>
         )
     }

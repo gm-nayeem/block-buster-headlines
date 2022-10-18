@@ -13,11 +13,13 @@ export default class Header extends Component {
     }
 
     handleKeyPress = (e) => {
-
+        if(e.key === 'Enter') {
+            this.props.search(this.state.searchTerm)
+        }
     }
 
   render() {
-    const {category} = this.props
+    const {category, changeCategory} = this.props
 
     return (
       <div className='my-4'>
@@ -37,11 +39,19 @@ export default class Header extends Component {
                 Object.keys(newsCategory).map((item, index) => {
                     return (
                         category === item ?
-                            <button key={index} className='btn btn-sm btn-warning mr-2 mb-2'>
+                            <button 
+                                key={index} 
+                                className='btn btn-sm btn-warning mr-2 mb-2'
+                                onClick={() => changeCategory(item)}
+                            >
                                 {`#${item}`}
                             </button> :
 
-                            <button key={index} className='btn btn-sm btn-light mr-2 mb-2'>
+                            <button 
+                                key={index} 
+                                className='btn btn-sm btn-light mr-2 mb-2'
+                                onClick={() => changeCategory(item)}
+                            >
                                 {`#${item}`}
                             </button>
 
