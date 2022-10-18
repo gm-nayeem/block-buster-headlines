@@ -145,7 +145,7 @@ class App extends Component {
                     isPrev={isPrev}
                     isNext={isNext}
                     totalPage={totalPage}
-                    currentPag={currentPage}
+                    currentPage={currentPage}
                     handlePageChange={this.handlePageChange}
                     goToPage={this.goToPage}
                   />

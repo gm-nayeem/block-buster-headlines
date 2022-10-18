@@ -85,7 +85,7 @@ export default class News {
     }
 
     _isNext() {
-        return this._currentPage < this._totalPagel
+        return this._currentPage < this._totalPage
     }
 
     _isPrev() {
