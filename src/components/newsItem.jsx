@@ -4,9 +4,9 @@ const getDateString = (date) => {
     return new Date(date).toDateString()
 }
 
-const NewsItem = ({item}) => {
+const NewsItem = React.forwardRef(({item}, ref) => {
   return (
-    <div className='card mb-4'>
+    <div ref={(element) => ref.push(element)} className='card mb-4'>
         {item.urlToImage && (
             <img 
                 className='card-img-top'
@@ -55,6 +55,6 @@ const NewsItem = ({item}) => {
         </div>
     </div>
   )
-}
+});
 
 export default NewsItem

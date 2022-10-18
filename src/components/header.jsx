@@ -1,14 +1,12 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 
 import { newsCategory } from '../news'
 
-export default class Header extends Component {
+class Header extends Component {
     
     state = {
         searchTerm: ''
     }
-
-    searchRef = createRef();
 
     handleChange = (e) => {
         this.setState({searchTerm: e.target.value})
@@ -20,10 +18,6 @@ export default class Header extends Component {
         }
     }
 
-    componentDidMount() {
-        this.searchRef.current.focus();
-    }
-
   render() {
     const {category, changeCategory} = this.props
 
@@ -33,7 +27,7 @@ export default class Header extends Component {
             Block Buster Headlines
         </h1>
         <input 
-            ref={this.searchRef}
+            ref={this.props.innerRef}
             type='search'
             className='form-control'
             placeholder='Type Anything & Press Enter To Search'
@@ -69,3 +63,7 @@ export default class Header extends Component {
     )
   }
 }
+
+export default React.forwardRef((props, ref) => (
+    <Header {...props} innerRef={ref} />)
+)

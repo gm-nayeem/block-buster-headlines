@@ -16,6 +16,8 @@ class App extends Component {
   }
 
   aboutResult = createRef();
+  searchRef = createRef();
+  itemRefList = []
 
   componentDidMount() {
     news.getNews()
@@ -26,7 +28,11 @@ class App extends Component {
         console.log(e)
         alert('Something Went Wrong!!')
         this.setState({ isLoading: false })
-      })
+      });
+
+    // using Ref
+    this.searchRef.current.focus();
+    console.log(this.itemRefList);
   }
 
   goToTop = () => {
@@ -127,6 +133,7 @@ class App extends Component {
         <div className='row'>
           <div className='col-md-6 offset-md-3'>
             <Header
+              ref={this.searchRef}
               category={category}
               changeCategory={this.changeCategory}
               search={this.search}
@@ -144,7 +151,7 @@ class App extends Component {
                 <Loading />
               ) : (
                 <div>
-                  <NewsList news={article} />
+                  <NewsList ref={this.itemRefList} news={article} />
                   <Pagination
                     next={this.next}
                     prev={this.prev}
