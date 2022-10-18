@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 
 import News, { newsCategory } from './news';
 import Header from './components/header';
@@ -15,6 +15,8 @@ class App extends Component {
     isLoading: true
   }
 
+  aboutResult = createRef();
+
   componentDidMount() {
     news.getNews()
       .then(data => {
@@ -25,6 +27,10 @@ class App extends Component {
         alert('Something Went Wrong!!')
         this.setState({ isLoading: false })
       })
+  }
+
+  goToTop = () => {
+    window.scroll(0, this.aboutResult.current.scrollTop)
   }
 
   next = () => {
@@ -125,7 +131,7 @@ class App extends Component {
               changeCategory={this.changeCategory}
               search={this.search}
             />
-            <div className='d-flex'>
+            <div ref={this.aboutResult} className='d-flex'>
               <p className='text-black-50'>
                 About {totalResults} results found
               </p>
@@ -149,6 +155,12 @@ class App extends Component {
                     handlePageChange={this.handlePageChange}
                     goToPage={this.goToPage}
                   />
+                  <button 
+                    className='btn btn-secondary my-4' 
+                    onClick={this.goToTop}
+                  >
+                    Go To Top
+                  </button>
                 </div>
               )
             }
