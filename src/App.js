@@ -104,7 +104,7 @@ class App extends Component {
       })
   }
 
-  search= (searchTerm) => {
+  search = (searchTerm) => {
     this.setState({isLoading: true})
     news.search(searchTerm)
       .then(data => {
@@ -131,7 +131,7 @@ class App extends Component {
     return (
       <div className='container'>
         <div className='row'>
-          <div className='col-md-6 offset-md-3'>
+          <div className='col-md-8 offset-md-2'>
             <Header
               ref={this.searchRef}
               category={category}
